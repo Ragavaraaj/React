@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SliderBar from './SildeBar';
+import ButtonAppBar from './CusAppBar';
+import React, { Component } from 'react'
 
-class App extends Component {
+export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.toggleDrawer = this.toggleDrawer.bind(this);
+  }
+
+  state = {
+    left: false,
+  };
+
+  toggleDrawer = (open) => () => {
+    this.setState({
+      left : open,
+    });
+  };
+
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    <ButtonAppBar onClick={this.toggleDrawer(true)}>
+      < SliderBar open={this.state.left} onClick={this.toggleDrawer(false)}/>
+    </ButtonAppBar>
     );
   }
 }
 
-export default App;
+
